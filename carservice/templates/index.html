@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>PyCar Service</h1>
+            <p>Welcome to our world!</p>
+            <p>Currently we have:</p>
+            <ul>
+                <li><strong>Total car models:</strong> {{ num_car_models }}</li>
+                <li><strong>Customers:</strong> {{ num_automobiles }}</li>
+                <li><strong>Total orders:</strong> {{ num_orders }}</li>
+                <li><strong>Number of Services:</strong> {{ num_services }}</li>
+                <li><strong>Number of Service Orders:</strong> {{ num_service_orders }}</li>
+                <br>
+                <li><strong>Orders by Status 'New':</strong> {{ num_order_1 }}</li>
+                <li><strong>Orders by Status 'In Progress':</strong> {{ num_order_2 }}</li>
+                <li><strong>Orders by Status 'Works Done':</strong> {{ num_order_3 }}</li>
+                <li><strong>Orders by Status 'Closed':</strong> {{ num_order_4 }}</li>
+                <br>
+                <li><strong>Services by Status 'Not Started':</strong> {{ num_service_status_1 }}</li>
+                <li><strong>Services by Status 'Planned':</strong> {{ num_service_status_2 }}</li>
+                <li><strong>Services by Status 'In progress':</strong> {{ num_service_status_3 }}</li>
+                <li><strong>Services by Status 'Blocked':</strong> {{ num_service_status_4 }}</li>
+                <li><strong>Services by Status 'Done':</strong> {{ num_service_status_5 }}</li>
+
+  </ul>
+{% endblock %}

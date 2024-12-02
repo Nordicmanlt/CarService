@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>All Orders:</h1>
+
+
+  {% if order_list %}
+  <ul>
+    {% for order in order_list %}
+      <li>
+        <a href="{{ order.id }}">{{order.service.service_name}}: </a> Kiekis: {{ order.qty }};
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Customers' orders list is private</p>
+  {% endif %}
+{% endblock %}

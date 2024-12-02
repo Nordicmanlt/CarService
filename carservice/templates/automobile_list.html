@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Our happy customers drive:</h1>
+  {% if automobile_list %}
+  <ul>
+    {% for automobile in automobile_list %}
+      <li>
+        <a href="{{ automobile.id }}">{{ automobile.car_plate }}</a> ({{automobile.vin_code}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Customers' list is private</p>
+  {% endif %}
+{% endblock %}

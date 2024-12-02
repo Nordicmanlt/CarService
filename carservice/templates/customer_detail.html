@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Customer</h1>
+<p>Automobilis:<strong> {{ order.car.car_model }}</strong></p>
+<p>Valstybinis numeris:<strong> {{ order.car.car_plate }}</strong></p>
+<p>VIN kodas:<strong> {{ order.car.vin_code }}</strong></p>
+<p>Klientas:<strong> {{ order.car.customer }}</strong></p>
+<br>
+<h4>Service Orders:</h4>
+<ul>
+    {% for service_order in order.serviceorder_set.all %}
+    <li>
+        <p>
+            Service: <strong>{{ service_order.service.service_name }}</strong>
+            Quantity: <strong>{{ service_order.qty }}</strong>
+            Status: <strong class="{% if service_order.service_status == '1' %}text-danger{% elif service_order.service_status == '2' or service_order.service_status == '3' %}text-warning{% else %}text-success{% endif %}">
+                {{ service_order.get_service_status_display }}
+            </strong>
+        </p>
+    </li>
+    {% empty %}
+    <p>No services associated with this order.</p>
+    {% endfor %}
+</ul>
+{% endblock %}

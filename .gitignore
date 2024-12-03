@@ -1,1 +1,7 @@
 /.venv/
+/carservice/migrations/
+/skirpts/
+*.sqlite3
+.env
+/.idea/
+/admin-interface/

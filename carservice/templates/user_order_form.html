@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+  <h1>All Your Orders:</h1>
+
+
+  {% if order_list %}
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Order Date</th>
+      <th>Car Model</th>
+        <th>Total Sum</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in order_list %}
+      <tr>
+        <td>
+          <a href="{% url 'order-detail' order.pk %}" class="{% if order.order_status == '1' %}text-danger{% elif order.order_status == '2' or order.order_status == '3' %}text-warning{% elif order.order_status == '5' %}text-secondary{% else %}text-success{% endif %}">
+            {{ order.get_order_status_display }}
+          </a>
+        </td>
+        <td>{{ order.order_date }}</td>
+        <td>{{ order.car.car_model }}</td>
+          <td>{{ order.total_order_sum }} Eur</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--#puslapiavimas-->
+<div style="text-align: center; font-size: 14px; color: #333;">
+    <span class="step-links" style="display: inline-block;">
+        {% if page_obj.has_previous %}
+            <a href="?page=1" style="color: #333;">&laquo; pirmas</a>
+            <a href="?page={{ page_obj.previous_page_number }}" style="color: #333;">atgal</a>
+        {% endif %}
+
+        <span class="current">
+            {{ page_obj.number }} iš {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" style="color: #333;">pirmyn</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" style="color: #333;">paskutinis &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Album example</h1>
+        <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+        <p>
+          <a href="#" class="btn btn-primary my-2">Main call to action</a>
+          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {% else %}
+<br>
+    <p>You don't have service orders</p>
+  {% endif %}
+{% endblock %}
+
+

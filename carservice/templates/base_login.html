@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block layout %}
+
+<div class="d-flex justify-content-center align-items-center min-vh-100" style="position: relative;">
+    <div class="card p-5 shadow-lg rounded-lg" style="width: 100%; max-width: 500px; position: absolute;">
+
+{% block content %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+<h1>
+    <span class="{% if order.order_status == '1' %}text-danger{% elif order.order_status == '2' %}text-warning{% elif order.order_status == '5' %}text-secondary{% else %}text-success{% endif %}">
+        {{ order.get_order_status_display }}
+    </span> | {{ order.order_date }}
+</h1>
+<br>
+<p>Automobile: <strong>{{ order.car.car_model }}</strong></p>
+<p>Reg. plate number: <strong>{{ order.car.car_plate }}</strong></p>
+<p>VIN: <strong>{{ order.car.vin_code }}</strong></p>
+<p>Customer: <strong>{{ order.car.customer }}</strong></p>
+<br>
+
+
+<p>Planned return date: <strong><span class="{% if order.is_overdue %}text-danger{% else %}text-warning{% endif %}">{{ order.due_back }}</span></strong></p>
+
+<br>
+<h4>Service Requests:</h4>
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th>Service name</th>
+            <th>Qty</th>
+            <th>Status</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for service_request in order.serviceorder_set.all %}
+        <tr>
+            <td>{{ service_request.service.service_name }}</td>
+            <td>{{ service_request.qty }}</td>
+            <td class="{% if service_request.service_status == '1' %}text-danger{% elif service_request.service_status == '2' or service_request.service_status == '3' %}text-warning{% elif service_request.service_status == '6' %}text-secondary{% else %}text-success{% endif %}">
+                {{ service_request.get_service_status_display }}
+            </td>
+            <td>{{ service_request.service.service_price }} Eur</td>
+            <td>{{ service_request.total_service_price }} Eur</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No services associated with this order.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4" class="text-end"><strong>Total Order Sum:</strong></td>
+            <td><strong>{{ order.total_order_sum }} Eur</strong></td>
+        </tr>
+    </tfoot>
+</table>
+<br>
+<br>
+<button type="button" class="btn btn-secondary btn-sm" onclick="window.history.back();">Back</button>
+{% endblock %}
